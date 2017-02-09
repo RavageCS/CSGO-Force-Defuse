@@ -13,4 +13,4 @@ Forces a player to stick the bomb defuse after a given number of aborted defuses
  
 
 ---
-[Allied Modders Thread](https://forums.alliedmods.net/showthread.php?t=286092 "Allied Modders Thread")
+[Allied Modders Thread](https://forums.alliedmods.net/showthread.php?t=293727 "Allied Modders Thread")
