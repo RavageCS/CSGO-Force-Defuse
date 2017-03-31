@@ -10,7 +10,7 @@ public Plugin myinfo =
     name = "CS:GO Force Defuse",
     author = "Gdk",
     description = "Forces player to stick bomb defuse",
-    version = "1.0.3",
+    version = "1.1.0",
     url = "https://github.com/RavageCS/CSGO-Force-Defuse"
 };
 
@@ -65,11 +65,13 @@ public void ResetGlobals()
 
 public Action Event_BeginDefuse(Handle event, const char[] name, bool dontBroadcast)
 {
-	if(GetConVarInt(g_h_enabled) && GetAllivePlayers(2) <= GetConVarInt(g_h_num_alive_defuse))
+	g_defuser = GetClientOfUserId(GetEventInt(event, "userid"));
+
+	int m_fFlags = GetEntProp(g_defuser, Prop_Send, "m_fFlags");
+
+	if(GetConVarInt(g_h_enabled) && GetAllivePlayers(2) <= GetConVarInt(g_h_num_alive_defuse) && m_fFlags != 256 && m_fFlags != 262)
 	{
 		g_has_kit = GetEventBool(event, "haskit");
-
-		g_defuser = GetClientOfUserId(GetEventInt(event, "userid"));
 
 		if(g_num_aborts[g_defuser][0] >= GetConVarInt(g_h_num_aborts))
 		{
@@ -104,10 +106,12 @@ public Action Event_BeginDefuse(Handle event, const char[] name, bool dontBroadc
 
 public Action Event_AbortDefuse(Handle event, const char[] name, bool dontBroadcast)
 {
-	if(GetConVarInt(g_h_enabled) && GetAllivePlayers(2) <= GetConVarInt(g_h_num_alive_defuse))
-	{
-		g_defuser = GetClientOfUserId(GetEventInt(event, "userid"));	
+	g_defuser = GetClientOfUserId(GetEventInt(event, "userid"));
 
+	int m_fFlags = GetEntProp(g_defuser, Prop_Send, "m_fFlags");
+
+	if(GetConVarInt(g_h_enabled) && GetAllivePlayers(2) <= GetConVarInt(g_h_num_alive_defuse) && m_fFlags != 256 && m_fFlags != 262)
+	{	
 		bool abort = false;
 		switch (GetConVarInt(g_h_behavior))
 		{
