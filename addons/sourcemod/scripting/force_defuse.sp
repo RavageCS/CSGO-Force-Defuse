@@ -10,7 +10,7 @@ public Plugin myinfo =
     name = "CS:GO Force Defuse",
     author = "Gdk",
     description = "Forces player to stick bomb defuse",
-    version = "1.1.0",
+    version = "1.1.2",
     url = "https://github.com/RavageCS/CSGO-Force-Defuse"
 };
 
@@ -149,7 +149,7 @@ public Action OnPlayerRunCmd(int client, int& buttons, int& impulse, float vel[3
 	{
 		buttons = g_buttons;
 		TeleportEntity(g_defuser, g_origin, g_angles, NULL_VECTOR);
-		SetEntProp(client, Prop_Send, "m_fFlags", FL_ONGROUND);
+		SetEntProp(g_defuser, Prop_Send, "m_fFlags", FL_ONGROUND);
 	}
 	
     	return Plugin_Continue;
